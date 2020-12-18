@@ -5,18 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Coin.create!(
-    description: "Bitcoin",
-    acronym: "BTC",
-    url_image:"https://upload.wikimedia.org/wikipedia/commons/c/cf/Bitcoin.com_logo.png"
-)
-Coin.create!(
-    description: "Ethereum",
-    acronym: "ETH",
-    url_image:"https://img.icons8.com/nolan/2x/ethereum.png"
-)
-Coin.create!(
-    description: "Dash",
-    acronym: "DASH",
-    url_image:"https://www.pinclipart.com/picdir/middle/556-5565319_dash-coin-png-email-contact-clipart.png"
-)
+
+#Array de registros
+spinner = TTY::Spinner.new("[:spinner] Cadastrando Moedas...")
+spinner.auto_spin
+coins = [
+            {description: "Bitcoin", acronym: "BTC", url_image:"https://upload.wikimedia.org/wikipedia/commons/c/cf/Bitcoin.com_logo.png"},
+            {description: "Ethereum", acronym: "ETH", url_image:"https://img.icons8.com/nolan/2x/ethereum.png"},
+            {description: "Dash", acronym: "DASH", url_image:"https://www.pinclipart.com/picdir/middle/556-5565319_dash-coin-png-email-contact-clipart.png"}
+        ]
+
+    #irá percorrer o array coins e verificar se existe no banco de dados e se existir não irá duplicar os registros
+coins.each do |coin|
+    Coin.find_or_create_by!(coin)
+end
+spinner.success("(Concluído!)")
+    
