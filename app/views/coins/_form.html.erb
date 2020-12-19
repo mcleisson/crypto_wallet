@@ -26,6 +26,10 @@
     <%= form.text_field :url_image %>
   </div>
 
+<div class="field">
+<%= form.select("mining_type_id", @mining_type_options, { include_blank: "Selecione..." }) %>
+</div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

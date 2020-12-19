@@ -6,8 +6,9 @@ namespace :dev do
       show_spinner("Apagando DB...") { %x(rails db:drop) }
       show_spinner("Criando DB...") { %x(rails db:create) }
       show_spinner("Criando tabelas no DB...") { %x(rails db:migrate) }
+      %x(rails dev:add_mining_type)
       %x(rails dev:add_coins) 
-      %x(rails dev:add_mining_type) 
+       
       else
        puts "Você não está em ambiente de desenvolvimento!!!"
     end
@@ -19,9 +20,9 @@ namespace :dev do
           
 
             coins = [
-                      {description: "Bitcoin", acronym: "BTC", url_image:"https://upload.wikimedia.org/wikipedia/commons/c/cf/Bitcoin.com_logo.png"},
-                      {description: "Ethereum", acronym: "ETH", url_image:"https://img.icons8.com/nolan/2x/ethereum.png"},
-                      {description: "Dash", acronym: "DASH", url_image:"https://www.pinclipart.com/picdir/middle/556-5565319_dash-coin-png-email-contact-clipart.png"}
+                      {description: "Bitcoin", acronym: "BTC", url_image:"https://upload.wikimedia.org/wikipedia/commons/c/cf/Bitcoin.com_logo.png", mining_type: MiningType.find_by(acronym: 'PoW')},
+                      {description: "Ethereum", acronym: "ETH", url_image:"https://img.icons8.com/nolan/2x/ethereum.png", mining_type: MiningType.all.sample},
+                      {description: "Dash", acronym: "DASH", url_image:"https://www.pinclipart.com/picdir/middle/556-5565319_dash-coin-png-email-contact-clipart.png", mining_type: MiningType.all.sample}
                     ]
 
         #irá percorrer o array coins e verificar se existe no banco de dados e se existir não irá duplicar os registros
