@@ -1,5 +1,8 @@
+<div class="jumbotron">
 <h1>Seja bem Vindo</h1>
-<p><strong> Data:</strong> <%= date_br(Date.today) %> </p>
+<p>Idioma utilizado:<strong> <%= t('current_locale') %></strong>
+<p><strong> Data:</strong> <%= l(Date.today) %> </p>
 <%= render 'menu' %>
 <p>
 Você está no ambiente de: <strong><%= ambiente_rails %></strong></p>
+</div>
